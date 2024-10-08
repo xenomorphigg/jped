@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            padding-top: 20px;
+            text-align: center;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 15px;
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+            font-size: 18px;
+            text-align: left;
+            padding-left: 30px;
+        }
+
+        .sidebar a:hover {
+            background-color: #f8f8f8;
+        }
+
+        /* Header Styling */
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            margin-left: -20px; /* Adjust for sidebar */
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .header p {
+            margin: 5px 0;
+            font-size: 1.2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group select,
+        .form-group input[type="date"],
+        .form-group input[type="time"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group input[type="submit"] {
+            background-color: #ff5959;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #e04747;
+        }
+
+        .time-slot {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .time-slot label {
+            flex: 1 1 calc(33.333% - 10px);
+            text-align: center;
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            transition: background-color 0.3s ease;
+        }
+
+        .time-slot input[type="radio"] {
+            display: none;
+        }
+
+        .time-slot input[type="radio"]:checked + label {
+            background-color: #ff5959;
+            color: white;
+            border-color: #ff5959;
+        }
+
+        /* Toggle Button */
+        .sidebar-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .sidebar-toggle:hover {
+            background-color: #f8f8f8;
+            color: rgb(0, 0, 0);
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+    <!-- Sidebar Section -->
+    <div class="sidebar" id="sidebar">
+        <h2>Menu</h2>
+        <a href="homepage.html">Home</a>
+        <a href="team.html">Team Profile</a>
+        <a href="booking.html">Booking</a>
+        <a href="bookinfo.html">Booking Info</a>
+    </div>
+
+    <!-- Header Section -->
+    <div class="header">
+        <h1>JPED</h1>
+        <p>
+            <span class="category">Street</span> 
+            <span class="separator">-</span> 
+            <span class="category">Event</span> 
+            <span class="separator">-</span> 
+            <span class="category">Debut</span>
+        </p>
+    </div>
+
+    <div class="container">
+        <h1>Book Your Photography Session</h1>
+        <form id="booking-form">
+            <!-- Service Selection -->
+            <div class="form-group">
+                <label for="service">Select Service</label>
+                <select id="service" name="service" required>
+                    <option value="">--Select Service--</option>
+                    <option value="portrait">Portrait Photography</option>
+                    <option value="event">Event Photography</option>
+                    <option value="landscape">Landscape Photography</option>
+                    <option value="product">Product Photography</option>
+                </select>
+            </div>
+
+            <!-- Date Selection -->
+            <div class="form-group">
+                <label for="date">Select Date</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+
+            <!-- Time Slot Selection -->
+            <div class="form-group">
+                <label>Choose Time Slot</label>
+                <div class="time-slot">
+                    <input type="radio" id="slot1" name="time-slot" value="09:00" required>
+                    <label for="slot1">09:00 AM</label>
+
+                    <input type="radio" id="slot2" name="time-slot" value="10:00">
+                    <label for="slot2">10:00 AM</label>
+
+                    <input type="radio" id="slot3" name="time-slot" value="11:00">
+                    <label for="slot3">11:00 AM</label>
+
+                    <input type="radio" id="slot4" name="time-slot" value="12:00">
+                    <label for="slot4">12:00 PM</label>
+
+                    <input type="radio" id="slot5" name="time-slot" value="01:00">
+                    <label for="slot5">01:00 PM</label>
+
+                    <input type="radio" id="slot6" name="time-slot" value="02:00">
+                    <label for="slot6">02:00 PM</label>
+
+                    <input type="radio" id="slot7" name="time-slot" value="03:00">
+                    <label for="slot7">03:00 PM</label>
+
+                    <input type="radio" id="slot8" name="time-slot" value="04:00">
+                    <label for="slot8">04:00 PM</label>
+
+                    <input type="radio" id="slot9" name="time-slot" value="05:00">
+                    <label for="slot9">05:00 PM</label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <input type="submit" value="Book Now">
+            </div>
+        </form>
+    </div>
+
+    <!-- JavaScript for Sidebar Toggle -->
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+            } else {
+                sidebar.classList.add('open');
+            }
+        }
+    </script>
+
+
+</body>
+</html>

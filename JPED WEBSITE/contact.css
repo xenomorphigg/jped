@@ -1,0 +1,120 @@
+*:root {
+    --main-bg-color: #000;
+    --main-text-color: #fff;
+    --secondary-text-color: #9df2fd;
+    --hover-bg-color: #fff;
+    --hover-text-color: #000;
+    --shadow-color: rgba(0, 0, 0, 0.75);
+    --border-color: rgba(0, 0, 0, 0.48);
+    --info-color: #0085e2;
+    font-family: "Poppins", sans-serif;
+    
+}
+*
+.container {
+    max-width: 1200px;
+    min-width: 300px; 
+    width: 100%;
+    margin: 0 auto;
+    background-color: white;
+}
+
+.contact-parent {
+    display: flex;
+    margin: 80px 0;
+}
+
+.contact-child {
+    display: flex;
+    flex: 1;
+    box-shadow: 0 0 10px -2px var(--shadow-color);
+}
+
+.child1 {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url("https://cdn.pixabay.com/photo/2019/06/28/00/17/architecture-4303279_1280.jpg");
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: var(--main-text-color);
+    padding: 100px 0;
+}
+
+.child1 p {
+    padding-left: 20%;
+    font-size: 20px;
+    text-shadow: 0 0 2px #000;
+}
+.child1 p span {
+    font-size: 16px;
+    color: #fff;
+}
+
+.child2 {
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.inside-contact {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.inside-contact h2 {
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.inside-contact h3 {
+    text-align: center;
+    font-size: 16px;
+    color: var(--info-color);
+}
+
+.inside-contact input,
+.inside-contact textarea {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid var(--border-color);
+    padding: 5px 10px;
+    margin-bottom: 20px;
+}
+
+.inside-contact input[type="submit"] {
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    transition: 0.2s;
+    border: 2px solid var(--main-bg-color);
+    margin: 30px 0;
+}
+
+.inside-contact input[type="submit"]:hover {
+    background-color: var(--hover-bg-color);
+    color: var(--hover-text-color);
+    transition: 0.2s;
+}
+
+@media screen and (max-width: 991px) {
+    .contact-parent {
+        display: block;
+        width: 100%;
+    }
+
+    .child1 {
+        display: none;
+    }
+
+    .child2 {
+        background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+                          url("https://cdn.pixabay.com/photo/2019/06/28/00/17/architecture-4303279_1280.jpg");
+        background-size: cover;
+    }
+
+    .inside-contact input,
+    .inside-contact textarea {
+        background-color: #fff;
+    }
+}

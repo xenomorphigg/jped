@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinterest-Style Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevents horizontal scrolling */
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            padding-top: 20px;
+            text-align: center;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 15px;
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+            font-size: 18px;
+            text-align: left;
+            padding-left: 30px;
+        }
+
+        .sidebar a:hover {
+            background-color: #f8f8f8;
+        }
+
+        /* Header Styling */
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            margin-left: -20px; /* Adjust for sidebar */
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .header p {
+            margin: 5px 0;
+            font-size: 1.2rem;
+        }
+
+        /* Masonry Grid Layout */
+        .gallery-container {
+            column-count: 4;
+            column-gap: 15px;
+            padding: 15px;
+            margin-left: 265px; /* Adjust for sidebar */
+        }
+
+        /* Gallery Item */
+        .gallery-item {
+            background-color: white;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: inline-block;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            break-inside: avoid;
+        }
+
+        /* Gallery Image */
+        .gallery-item img {
+            width: 100%;
+            border-radius: 10px 10px 0 0;
+        }
+
+        /* Gallery Caption */
+        .caption {
+            padding: 10px;
+            text-align: center;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        /* Responsive Columns */
+        @media (max-width: 1200px) {
+            .gallery-container {
+                column-count: 3;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-container {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .gallery-container {
+                column-count: 1;
+                margin-left: 0;
+            }
+            .header {
+                margin-left: 0;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                transform: translateX(0);
+            }
+        }
+
+        /* Toggle Button */
+        .sidebar-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .sidebar-toggle:hover {
+            background-color: #f8f8f8;
+            color: rgb(0, 0, 0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+    <!-- Sidebar Section -->
+    <div class="sidebar" id="sidebar">
+        <h2>Menu</h2>
+        <a href="homepage.html">Home</a>
+        <a href="team.html">Team Profile</a>
+        <a href="booking.html">Booking</a>
+        <a href="bookinfo.html">Booking Info</a>
+        <a href="contact.html">Contact</a>
+
+        
+    </div>
+
+    <!-- Header Section -->
+    <div class="header">
+        <h1>JPED</h1>
+        <p>
+            <span class="category">Street</span> 
+            <span class="separator">-</span> 
+            <span class="category">Event</span> 
+            <span class="separator">-</span> 
+            <span class="category">Debut</span>
+        </p>
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="gallery-container">
+
+        <!-- Example Gallery Items -->
+        <div class="gallery-item">
+            <img src="DSC_0210 (1).jpg" alt="Gallery Image 1">
+            <div class="caption">Image Caption 1</div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/300x500" alt="Gallery Image 2">
+            <div class="caption">Image Caption 2</div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="DSC_0320 (1).jpg" alt="Gallery Image 3">
+            <div class="caption">Image Caption 3</div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="  " alt="Gallery Image 4">
+            <div class="caption">Image Caption 4</div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="DSC_0355 (1).jpg" alt="Gallery Image 5">
+            <div class="caption">Image Caption 5</div>
+        </div>
+
+        <div class="gallery-item">
+            <img src="https://via.placeholder.com/300x550" alt="Gallery Image 6">
+            <div class="caption">Image Caption 6</div>
+        </div>
+
+        <!-- Add more gallery items as needed -->
+    </div>
+
+    <!-- JavaScript for Sidebar Toggle -->
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+            } else {
+                sidebar.classList.add('open');
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Sign Up</title>
+    <style>
+        /* CSS STYLES */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            display: flex;
+            width: 70%;
+            max-width: 900px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sign-in, .sign-up {
+            width: 50%;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .sign-in {
+            background-color: #33cabb;
+            color: white;
+            text-align: center;
+        }
+
+        .sign-in h2 {
+            margin-bottom: 20px;
+        }
+
+        .sign-in p {
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background-color: white;
+            color: #33cabb;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #29a197;
+        }
+
+        .sign-up {
+            text-align: center;
+        }
+
+        .social-login {
+            margin-bottom: 20px;
+        }
+
+        .social-btn {
+            border: none;
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin: 0 5px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .social-btn:hover {
+            background-color: #ccc;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .success-msg {
+            color: green;
+            margin-bottom: 20px;
+        }
+
+        .error-msg {
+            color: red;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="sign-in">
+            <h2>Welcome Back!</h2>
+            <p>To keep connected with us please login with your personal info</p>
+            <a class="btn sign-in-btn" href="login .html" id="signInBtn">Sign In</a>
+        </div>
+
+        <div class="sign-up">
+            <h2>Create Account</h2>
+            <div class="social-login">
+                <button class="social-btn fb-btn" onclick="socialSignIn('Facebook')">FB</button>
+                <button class="social-btn google-btn" onclick="socialSignIn('Google')">G+</button>
+                <button class="social-btn linkedin-btn" onclick="socialSignIn('LinkedIn')">In</button>
+            </div>
+            <p>or use your email for registration:</p>
+
+            <!-- Sign Up Form -->
+            <form id="signupForm" onsubmit="handleSubmit(event)">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit" class="btn sign-up-btn">Sign Up</button>
+            </form>
+
+            <!-- Display success or error messages -->
+            <p id="message"></p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript FUNCTIONS
+
+        // Function to handle "Sign In" button click
+        function signIn() {
+            alert('Sign In button clicked!');
+        }
+
+        // Function to handle social sign-in button clicks
+        function socialSignIn(platform) {
+            alert(`Signing in with ${platform}`);
+        }
+
+        // Add event listener for the Sign In button
+        document.getElementById('signInBtn').addEventListener('click', signIn);
+
+        // Handle form submission
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent form from submitting normally
+
+            // Fetch form values
+            const name = document.querySelector('input[name="name"]').value;
+            const email = document.querySelector('input[name="email"]').value;
+            const password = document.querySelector('input[name="password"]').value;
+
+            // Simple client-side validation
+            let message = '';
+            if (!name || !email || !password) {
+                message = 'All fields are required!';
+            } else {
+                message = `Sign Up successful for ${name}!`;
+            }
+
+            // Display message
+            document.getElementById('message').textContent = message;
+            document.getElementById('message').className = message.includes('successful') ? 'success-msg' : 'error-msg';
+        }
+    </script>
+</body>
+</html>
